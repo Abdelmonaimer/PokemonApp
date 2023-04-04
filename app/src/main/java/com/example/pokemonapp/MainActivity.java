@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         pikachu = findViewById(R.id.imageButton9);
         pikachutext = findViewById(R.id.pikachuTxt);
 
+
         bulbasaur.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,15 +66,13 @@ public class MainActivity extends AppCompatActivity {
         squirtle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( MainActivity.this,Squirtle.class);
+                Intent intent = new Intent( MainActivity.this,MainActivity2.class);
 
-                Pair[] pairs = new Pair[2];
-                pairs[0] = new Pair<View, String>(squirtle,"squirtleImageTransition");
-                pairs[1] = new Pair<View, String>(squirtletext,"squirtleTransition");
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
 
-                startActivity(intent, options.toBundle());
+                //ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this);
+
+                startActivity(intent);
             }
         });
         pikachu.setOnClickListener(new View.OnClickListener() {
