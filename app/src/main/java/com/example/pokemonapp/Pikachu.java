@@ -2,16 +2,20 @@ package com.example.pokemonapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.pokemonapp.databinding.ActivityPikachuBinding;
 import com.example.pokemonapp.models.Pokemon;
+import com.example.pokemonapp.models.Stat;
 import com.example.pokemonapp.pokeapi.PokeapiService;
 
 import java.util.List;
@@ -32,6 +36,17 @@ public class Pikachu extends AppCompatActivity {
     private TextView textView6;
     private TextView textView8;
     private int color;
+
+   /* ProgressBar progressbar = findViewById(R.id.progressbar);
+    ProgressBar progressbar2 = findViewById(R.id.progressbar2);
+    ProgressBar progressbar3 = findViewById(R.id.progressbar3);
+    ProgressBar progressbar4 = findViewById(R.id.progressbar4);
+    ProgressBar progressbar5 = findViewById(R.id.progressbar5);
+    private TextView textView9;*/
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,11 +62,11 @@ public class Pikachu extends AppCompatActivity {
                 .build();
         takeData();
         getDonnee();
-        startAnimationCounter_HP(0,50);
+       /* startAnimationCounter_HP(0,50);
         startAnimationCounter_ATK(0,70);
         startAnimationCounter_DEF(0,40);
         startAnimationCounter_SPD(0,90);
-        startAnimationCounter_EXP(0,45);
+        startAnimationCounter_EXP(0,45);*/
 
 
 
@@ -83,6 +98,30 @@ public class Pikachu extends AppCompatActivity {
                 imageView.setBackground(drawable);
                 textView.setTextColor(color);
                 textView.setAllCaps(true);
+                for (Stat stat : pokemonRequest.getStats()) {
+                    switch (stat.getStat().getName()) {
+                        case "hp":
+
+                            createLoadingAnimation(binding.progressbar, binding.textView9, stat.getBaseStat(), 100);
+                            break;
+                        case "attack":
+                            createLoadingAnimation(binding.progressbar2, binding.textView10, stat.getBaseStat(), 100);
+                            break;
+                        case "defense":
+                            createLoadingAnimation(binding.progressbar3, binding.textView13, stat.getBaseStat(), 100);
+                            break;
+                        case "speed":
+                            createLoadingAnimation(binding.progressbar4, binding.textView15, stat.getBaseStat(), 100);
+                            break;
+                        case "special-defense":
+                            createLoadingAnimation(binding.progressbar5, binding.textView17, stat.getBaseStat(), 100);
+                            break;
+                        /*case "speed":
+                            createLoadingAnimation(progressBar6, progressText6, stat.getBaseStat(), 100);
+                            break;*/
+                    }
+                }
+
             }
 
             @Override
@@ -153,6 +192,24 @@ public class Pikachu extends AppCompatActivity {
                 //Log.e(TAG," not working: ");
             }
         });
+    }
+    private void createLoadingAnimation(ProgressBar progressBar, TextView progressText, int baseStat, int effort) {
+        int maxWidth = progressBar.getWidth() - progressBar.getPaddingLeft() - progressBar.getPaddingRight();
+        int maxProgress = (int) ((baseStat * maxWidth) / (float) progressBar.getWidth());
+        int progress = effort > maxProgress ? maxProgress : effort;
+        ObjectAnimator progressAnimator = ObjectAnimator.ofInt(progressBar, "progress", 0, progress);
+        progressAnimator.setDuration(1500);
+        progressAnimator.start();
+        progressAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int progress = (int) valueAnimator.getAnimatedValue()-3;
+                int width = progressBar.getWidth();
+                //float position = (progress / (float) progressBar.getMax() * width);
+                //progressText.setX(progressBar.getX() + position - progressText.getWidth() / 2f);
+            }
+        });
+        progressText.setText(baseStat + "");
     }
     public void startAnimationCounter_HP(int start_no,int end_no){
         ValueAnimator animator = ValueAnimator.ofInt(start_no,end_no);

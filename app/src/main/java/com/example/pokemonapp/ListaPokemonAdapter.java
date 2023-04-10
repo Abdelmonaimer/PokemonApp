@@ -38,13 +38,13 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
     }
     private int getRandomColor(int position) {
         int color = prefs.getInt("color_" + position, Color.WHITE);
-            Random rnd = new Random();
-                int col1 = rnd.nextInt(256);
-                int col2 = rnd.nextInt(256);
-                int col3 = rnd.nextInt(256);
-                color = Color.rgb(col1, col2, col3);
+        Random rnd = new Random();
+        int col1 = rnd.nextInt(256);
+        int col2 = rnd.nextInt(256);
+        int col3 = rnd.nextInt(256);
+        color = Color.rgb(col1, col2, col3);
 
-            prefs.edit().putInt("color_" + position, color).apply();
+        prefs.edit().putInt("color_" + position, color).apply();
 
         return color;
     }
@@ -62,7 +62,7 @@ public class ListaPokemonAdapter extends RecyclerView.Adapter<ListaPokemonAdapte
         int randomColor = getRandomColor(position);
        drawable.setShape(GradientDrawable.RECTANGLE);
        setCornerRadii(drawable, 120f, 120f, 120f, 120f);
-
+       holder.numbrTextView.setTextColor(randomColor);
         drawable.setColor(randomColor);
         Glide.with(context)
                 .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+p.getNumber()+".png")

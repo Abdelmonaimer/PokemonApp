@@ -17,6 +17,8 @@ public class Pokemon {
 
     @SerializedName("types")
     private List<Type> types;
+    @SerializedName("stats")
+    private List<Stat> stats;
 
 
 
@@ -67,5 +69,13 @@ public class Pokemon {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public List<Stat> getStats() {
+        return stats;
+    }
+
+    public void setStats(List<Stat> stats) {
+        this.stats = stats;
     }
 }
