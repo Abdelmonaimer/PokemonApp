@@ -18,3 +18,12 @@ This app uses the Pokemon API to retrieve data about Pokemon. The API is open so
 
 ## Credits
 This app was created by ERRAJI Abdelmonaim for a school project. It is not affiliated with the Pokemon Company.
+
+
+# Code Explanation
+This will help you understand more the big methodes used in this project,
+
+## MainActivity 1 :
+
+The first activity contains a button that guides you directly to another Activity (named pikachu in my case) that shows all the pokemons.
+![image](https://user-images.githubusercontent.com/121363683/231844963-ed7aa941-e08d-4ebf-bc4b-b7ef6d72c8c0.png)
