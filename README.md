@@ -1,7 +1,5 @@
 # PokemonApp
-pokedex
 
-# Pokemon Mobile Application
 This is a mobile application built using Android Studio and Java that retrieves data from the Pokemon API and displays it in a user interface.
 
 
