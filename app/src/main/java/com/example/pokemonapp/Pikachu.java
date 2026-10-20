@@ -87,6 +87,8 @@ public class Pikachu extends AppCompatActivity {
                 Glide.with(Pikachu.this)
                         .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/"+index+".png")
                         .into(imageView);
+
+
                 textView6.setText(pokemonRequest.getWeight() + " KG");
                 textView8.setText(pokemonRequest.getHeight() + " FT");
                 Log.e(TAG," hello ? : " );
